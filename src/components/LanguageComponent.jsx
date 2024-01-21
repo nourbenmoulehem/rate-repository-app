@@ -17,7 +17,10 @@ const styles = StyleSheet.create({
     padding: 4,
     borderRadius: 4,
   },
-  
+  textStyle: {
+    color: "white",
+
+  }
 })
 
 export default LanguageComponent
