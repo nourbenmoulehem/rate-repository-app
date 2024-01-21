@@ -32,7 +32,6 @@ const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
     fontWeight === 'bold' && styles.fontWeightBold,
     style,
   ];
-  console.log("🚀 ~ Text ~ textStyle:", textStyle)
 
   return <NativeText style={textStyle} {...props} />;
 };
