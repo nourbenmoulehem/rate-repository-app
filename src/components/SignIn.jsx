@@ -1,5 +1,7 @@
-import { Text, TextInput, Pressable, View, StyleSheet } from "react-native";
-import { Formik, useField } from "formik";
+import { Text, Pressable, View, StyleSheet } from "react-native";
+import { Formik } from "formik";
+import * as yup from 'yup';
+
 
 import FormikTextInput from "./FormikTextInput";
 import theme from "../theme";
@@ -38,20 +40,32 @@ const SignInForm = ({ onSubmit }) => {
   );
 };
 
+const validationSchema = yup.object().shape({
+  username: yup
+    .string()
+    .matches(/^[a-zA-Z]+$/, 'Username must be alphanumeric')
+    .min(7, 'Username must have at least 7 character')
+    .required('Username is required'),
+  password: yup
+    .string()
+    .min(1, 'Password must have at least 1 character')
+    .required('Password is required')
+});
+
 const SignIn = () => {
   const onSubmit = (values) => {
-    console.log("🚀 ~ onSubmit ~ values:", values);
+    // console.log("🚀 ~ onSubmit ~ values:", values);
     const username = values.username;
     const password = values.password;
 
     if ( username && password ) {
-      console.log("🚀 ~ onSubmit ~ password:", password)
-      console.log("🚀 ~ onSubmit ~ username:", username)
+      // console.log("🚀 ~ onSubmit ~ password:", password)
+      // console.log("🚀 ~ onSubmit ~ username:", username)
     }
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
       {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
     </Formik>
   );
